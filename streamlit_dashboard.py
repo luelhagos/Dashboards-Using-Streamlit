@@ -6,14 +6,16 @@ from wordcloud import WordCloud
 import plotly.express as px
 from add_data import db_execute_fetch
 
+st.set_page_config('Topic Modeling and Sentiment Analysis', layout="wide")
 st.title('Topic Modeling and Sentiment Analysis')
-
-st.write("## Topic modeling and sentimet anlysis of twiteer data")
+st.markdown("***")
+#st.write("## Topic modeling and sentimet anlysis of twiteer data")
 
 # loads the data fromm the db based on query
 def loadData():
     query = "select * from Tweet"
-    df = db_execute_fetch(query, dbName="db_tweets", rdf=True)
+    df = db_execute_fetch(query, dbName="Tweetdb", rdf=True)
+    #st.write(df)
     return df 
 
 def text_category(p):
@@ -24,6 +26,20 @@ def text_category(p):
     if p > 0 : return 'positive'
     elif p == 0: return 'neutral'
     return 'negative'
+
+# display the db based on the polarity
+def display_df_polarity(p):
+    df = loadData()
+    df['score'] = df['polarity'].apply(text_category)
+    if p == 'positive':
+        st.write(df[df['score'] == 'positive'])
+    elif p == 'negative':
+        st.write(df[df['score'] == 'negative'])
+    elif p == 'neutral':
+        st.write(df[df['score'] == 'neutral'])
+    else:
+        st.write(df)
+   
 
 # Count the number of positive, neutral, and negative
 def polarity_count():
@@ -50,7 +66,6 @@ def pieChart():
     count = polarity_count()
     pie_fig = px.pie(values=[count[key] for key in count.keys()], names=list(count.keys()))
     st.plotly_chart(pie_fig)
-    
 
 # topic modeling
 def wordCloud():
@@ -68,8 +83,13 @@ def wordCloud():
     st.title("Tweet Text Word Cloud")
     st.image(wordcloud.to_array())
 
-#st.title("Data Visualizations")
-random_tweet = st.sidebar.selectbox('Visualizations', 
+polarity = st.selectbox('choose polarity of tweets', ('All', 'positive', 'negative', 'neutral'))
+display_df_polarity(polarity)
+
+st.markdown("***")
+st.markdown("***")
+st.title("Data Visualizations")
+random_tweet = st.selectbox('Visualizations', 
                 ('Topic Modeling','Bar Chart','Pie Chart'))
 if random_tweet == 'Topic Modeling':
     wordCloud()
