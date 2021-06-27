@@ -60,11 +60,12 @@ def barChart():
                 }).set_index('index')
     st.bar_chart(data)
   
+# draws pie chart of the polarity
 def pieChart():
-  """
-  To be implemented..
-  """
-  pass
+    st.title('Pie Chart')
+    count = polarity_count()
+    pie_fig = px.pie(values=[count[key] for key in count.keys()], names=list(count.keys()))
+    st.plotly_chart(pie_fig)
     
 def selectPolarity():
   """
