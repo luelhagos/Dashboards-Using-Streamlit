@@ -25,6 +25,15 @@ def text_category(p):
     elif p == 0: return 'neutral'
     return 'negative'
 
+# Count the number of positive, neutral, and negative
+def polarity_count():
+    df = loadData()
+    df['polarity'] = df['polarity'].apply(text_category) 
+    score = list(df['polarity'])
+    return { 'positive': score.count('positive'), 'neutral': score.count('neutral'),
+                            'negative': score.count('negative')  }
+
+
 def wordCloud():
     df = loadData()
     # Convert to lowercase
