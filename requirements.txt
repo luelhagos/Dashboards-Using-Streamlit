@@ -1,0 +1,6 @@
+pandas==1.2.4
+mysql_connector_repackaged==0.3.1
+altair==4.1.0
+numpy==1.20.1
+plotly==5.0.0
+wordcloud==1.8.1
