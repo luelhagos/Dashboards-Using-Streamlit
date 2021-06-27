@@ -16,11 +16,12 @@ def loadData():
     query = "select * from Tweet"
     df = db_execute_fetch(query, dbName="db_tweets", rdf=True)
     return df
-"""
-A function  that takes a value p and returns, depending on the value of p, 
-a string 'positive', 'negative' or 'neutral'
-"""
+
 def text_category(p):
+    """
+    A function  that takes a value p and returns, depending on the value of p, 
+    a string 'positive', 'negative' or 'neutral'
+    """
     if p > 0 : return 'positive'
     elif p == 0: return 'neutral'
     return 'negative'
