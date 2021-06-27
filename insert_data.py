@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+import string
+import re
 import mysql.connector as mysql
 from mysql.connector import Error
 
@@ -98,8 +100,20 @@ def preprocess_df(df: pd.DataFrame) -> pd.DataFrame:
     -------
 
     """
-    df.rename({'original_text':'clean_text'}, axis=1, inplace=True)
-    df = df[['clean_text', 'polarity']].fillna(0)
+
+    df.rename({'original_text':'clean_text'}, axis=1, inplace=True) # rename 'original_text' with 'clean_text'
+    df = df[['clean_text', 'polarity']] # select only columns with 'clean_text', 'polarity' and update the df
+
+    # Remove hyperlinks
+    rgx = lambda x: re.sub('http[s]?://\S+', '', x)
+    df['clean_text'] = df['clean_text'].map(rgx)
+
+    # Remove punctuation
+    df['clean_text']= \
+    df['clean_text'].apply(lambda x: x.translate(str.maketrans(' ', ' ', string.punctuation)))
+
+    df['polarity'] = pd.to_numeric(df['polarity'],errors='coerce')  # change polarity to numeric
+    df.dropna() # remove rows and columns with Null/NaN values.
     return df
 
 
@@ -207,3 +221,4 @@ if __name__ == "__main__":
     df = pd.read_csv('processed_tweet_data.csv')
 
     insert_to_tweet_table(dbName='db_tweets', df=df, table_name='Tweet')
+    
