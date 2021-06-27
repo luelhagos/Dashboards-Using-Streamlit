@@ -28,10 +28,10 @@ def text_category(p):
 # Count the number of positive, neutral, and negative
 def polarity_count():
     df = loadData()
-    df['polarity'] = df['polarity'].apply(text_category) 
-    score = list(df['polarity'])
-    return { 'positive': score.count('positive'), 'neutral': score.count('neutral'),
-                            'negative': score.count('negative')  }
+    df['score'] = df['polarity'].apply(text_category) 
+    sc = list(df['score'])
+    return { 'positive': sc.count('positive'), 'neutral': sc.count('neutral'),
+                            'negative': sc.count('negative')  }
 
 
 def wordCloud():
