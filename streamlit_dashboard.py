@@ -52,13 +52,14 @@ def wordCloud():
   
 # draws bar chart of the polarity
 def barChart():
-    st.title('BarChart')
+    st.title('Bar Chart')
     count = polarity_count()
     data = pd.DataFrame({
-    'index': list(count.keys()),
-    'total': [count[key] for key in count.keys()],
-                }).set_index('index')
-    st.bar_chart(data)
+    'Sentiment': list(count.keys()),
+    'Tweets': [count[key] for key in count.keys()],
+                })
+    bar_fig = px.bar(data, x='Sentiment', y='Tweets')
+    st.plotly_chart(bar_fig)
   
 # draws pie chart of the polarity
 def pieChart():
