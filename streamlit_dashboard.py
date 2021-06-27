@@ -19,10 +19,19 @@ def loadData():
 
 
 def wordCloud():
-  """
-  To be implemented..
-  """
-  pass
+    df = loadData()
+    # Convert to lowercase
+    df['clean_text'] = df['clean_text'].map(lambda x: x.lower())
+    # Join the different processed titles together.
+    long_string = ','.join(list(df['clean_text'].values))
+
+        # Create a WordCloud object
+    wordcloud = WordCloud(background_color="black", width=650, height=450, \
+                             min_font_size=5, contour_color='steelblue')
+    # Generate a word cloud
+    wordcloud.generate(long_string)
+    st.title("Tweet Text Word Cloud")
+    st.image(wordcloud.to_array())
   
 def barChart():
   """
