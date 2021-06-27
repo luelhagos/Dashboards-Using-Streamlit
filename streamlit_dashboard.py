@@ -50,11 +50,15 @@ def wordCloud():
     st.title("Tweet Text Word Cloud")
     st.image(wordcloud.to_array())
   
+# draws bar chart of the polarity
 def barChart():
-  """
-  To be implemented..
-  """
-  pass
+    st.title('BarChart')
+    count = polarity_count()
+    data = pd.DataFrame({
+    'index': list(count.keys()),
+    'total': [count[key] for key in count.keys()],
+                }).set_index('index')
+    st.bar_chart(data)
   
 def pieChart():
   """
