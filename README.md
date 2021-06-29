@@ -4,10 +4,10 @@
 ## Dashboards Using Streamlit
 __Streamlit__ is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science projects 
 ### Snippets from the dashboard  can be shown below.
-![](polarity.png)
-![](topicModel.png)
-![](piechart.png)
-![](BarChart.png)
+![](images/polarity.png)
+![](images/topicModel.png)
+![](images/piechart.png)
+![](images/BarChart.png)
 
 ### Reference
 * [Streamlit documentation](https://docs.streamlit.io/en/stable/)
