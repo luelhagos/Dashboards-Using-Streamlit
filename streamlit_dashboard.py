@@ -108,9 +108,9 @@ class streamlitDashboard:
 
 # create an object streamlit
 streamlt = streamlitDashboard()
-streamlt.selectHashTag()
-st.success("")
 streamlt.selectLoction()
+st.success("")
+streamlt.selectHashTag()
 st.success("")
 streamlt.display_df_polarity()
 st.success("")
