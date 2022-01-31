@@ -1,7 +1,7 @@
-# [10 Academy](https://www.10academy.org/)
+# Dashboards Using Streamlit
 
 > Task: Build a dashboard using streamlit, Flask or any other platform.
-## Dashboards Using Streamlit
+
 __Streamlit__ is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science projects
 
 ### About the files
